@@ -37,7 +37,7 @@
 				:required="props.required"
 				:aria-invalid="props.isValid"
 				aria-describedby="error-message"
-				class="block w-full rounded-md border-0 py-1.5 ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+				class="block w-full rounded-md pl-2.5 border-0 py-1.5 ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
 				:class="[
 					props.isValid
 						? INPUT_VALID['valid']
