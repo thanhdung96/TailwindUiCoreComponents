@@ -1,30 +1,18 @@
 <template>
-	<MatiButton :style="'primary'" :size="'xl'"> mati button </MatiButton>
-	<MatiInput
-		:id="'adawd'"
-		:required="true"
-		:placeholder="'sample placeholder'"
-	>
-		fsdbiefbsefse
-	</MatiInput>
+	<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+		<MatiInput
+			:id="'adawd'"
+			:required="true"
+			:placeholder="'sample placeholder'"
+			:is-valid="false"
+			:error-message="'fseufhseufsefes'"
+		>
+			<template #label>label slot</template>
+			<template #require>require slot</template>
+		</MatiInput>
+	</div>
 </template>
 
 <script setup lang="ts">
-import MatiButton from './core/MatiButton.vue'
-import MatiInput from './core/MatiInput.vue'
+import MatiInput from '@/core/MatiInput.vue'
 </script>
-
-<style scoped>
-.logo {
-	height: 6em;
-	padding: 1.5em;
-	will-change: filter;
-	transition: filter 300ms;
-}
-.logo:hover {
-	filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-	filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
