@@ -30,6 +30,7 @@
 		>
 			<input
 				:id="props.id"
+				v-model="inputValue"
 				:type="props.id"
 				:name="props.name"
 				:disabled="props.disabled"
@@ -37,7 +38,7 @@
 				:required="props.required"
 				:aria-invalid="props.isValid"
 				aria-describedby="error-message"
-				class="block w-full rounded-md pl-2.5 border-0 py-1.5 ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+				class="block w-full rounded-md border-0 outline-none px-2.5 py-1.5 ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
 				:class="[
 					props.isValid
 						? INPUT_VALID['valid']
@@ -68,24 +69,26 @@
 </template>
 
 <script setup lang="ts">
-import { ExclamationCircleIcon } from '@heroicons/vue/20/solid'
+import { ExclamationCircleIcon } from '@heroicons/vue/20/solid';
+import { computed } from 'vue';
 
 const INPUT_VALID = {
 	valid: 'text-gray-900 shadow-sm ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600',
 	invalid:
 		'pr-10 text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500',
-}
+};
 const LABEL_VALID = {
 	valid: 'text-gray-900',
 	invalid: 'text-red-900',
-}
+};
 const CONTAINER_VALID = {
 	none: '',
 	valid: 'mt-2',
 	invalid: 'relative mt-2 rounded-md shadow-sm',
-}
+};
 const props = defineProps({
 	id: { type: String, default: 'id' },
+	modelValue: { type: String, default: '' },
 	type: { type: String, default: 'text' },
 	name: { type: String, default: 'name' },
 	placeholder: { type: String, default: 'placeholder' },
@@ -93,19 +96,33 @@ const props = defineProps({
 	isValid: { type: Boolean, default: true },
 	errorMessage: { type: String, default: 'true' },
 	required: { type: Boolean, default: false },
-})
+});
 
-const emits = defineEmits(['onChange', 'onFocusIn', 'onFocusOut'])
+const emits = defineEmits([
+	'onChange',
+	'onFocusIn',
+	'onFocusOut',
+	'update:modelValue',
+]);
+
+const inputValue = computed({
+	get() {
+		return props.modelValue;
+	},
+	set(inputValue) {
+		emits('update:modelValue', inputValue);
+	},
+});
 
 const onChange = () => {
-	emits('onChange')
-}
+	emits('onChange');
+};
 
 const onFocusIn = () => {
-	emits('onFocusIn')
-}
+	emits('onFocusIn');
+};
 
 const onFocusOut = () => {
-	emits('onFocusOut')
-}
+	emits('onFocusOut');
+};
 </script>

@@ -203,6 +203,7 @@
 					<router-view></router-view>
 					<MatiInput
 						:id="'adawd'"
+						v-model="state.inputValue"
 						:required="true"
 						:placeholder="'sample placeholder'"
 						:is-valid="false"
@@ -211,6 +212,7 @@
 						<template #label>label slot</template>
 						<template #require>require slot</template>
 					</MatiInput>
+					<div>Text in Input: {{ state.inputValue }}</div>
 				</div>
 			</main>
 		</div>
@@ -219,10 +221,10 @@
 </template>
 
 <script setup lang="ts">
-import MatiInput from '@/core/MatiInput.vue'
-import MatiNav from './core/MatiNav.vue'
+import MatiInput from '@/core/MatiInput.vue';
+import MatiNav from '@/core/MatiNav.vue';
 
-import { ref } from 'vue'
+import { ref, reactive } from 'vue';
 import {
 	Dialog,
 	DialogPanel,
@@ -232,7 +234,7 @@ import {
 	MenuItems,
 	TransitionChild,
 	TransitionRoot,
-} from '@headlessui/vue'
+} from '@headlessui/vue';
 import {
 	Bars3Icon,
 	BellIcon,
@@ -243,23 +245,56 @@ import {
 	HomeIcon,
 	UsersIcon,
 	XMarkIcon,
-} from '@heroicons/vue/24/outline'
-import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
-import { NavItemListType, NavItemType } from '@/core/interfaces/INavItem'
+} from '@heroicons/vue/24/outline';
+import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
 
-const navigation = new NavItemListType([
-	new NavItemType('#', true, 'Dashboard', HomeIcon),
-	new NavItemType('#', true, 'Team', UsersIcon),
-	new NavItemType('#', true, 'Projects', FolderIcon),
-	new NavItemType('#', true, 'Calendar', CalendarIcon),
-	new NavItemType('#', true, 'Documents', DocumentDuplicateIcon),
-	new NavItemType('#', true, 'Reports', ChartPieIcon),
-])
+const state = reactive({
+	inputValue: '',
+});
+
+const navigation = [
+	{
+		href: '#',
+		current: true,
+		name: 'Dashboard',
+		icon: HomeIcon,
+	},
+	{
+		href: '#',
+		current: true,
+		name: 'Team',
+		icon: UsersIcon,
+	},
+	{
+		href: '#',
+		current: true,
+		name: 'Projects',
+		icon: FolderIcon,
+	},
+	{
+		href: '#',
+		current: true,
+		name: 'Calendar',
+		icon: CalendarIcon,
+	},
+	{
+		href: '#',
+		current: true,
+		name: 'Documents',
+		icon: DocumentDuplicateIcon,
+	},
+	{
+		href: '#',
+		current: true,
+		name: 'Reports',
+		icon: ChartPieIcon,
+	},
+];
 
 const userNavigation = [
 	{ name: 'Your profile', href: '#' },
 	{ name: 'Sign out', href: '#' },
-]
+];
 
-const sidebarOpen = ref(false)
+const sidebarOpen = ref(false);
 </script>

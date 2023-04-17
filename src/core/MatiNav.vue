@@ -4,17 +4,17 @@
 			<li>
 				<ul role="list" class="-mx-2 space-y-1">
 					<MatiNavItem
-						v-for="item in props.navItemList.lstNavItem"
+						v-for="item in props.navItemList"
 						:key="item.name"
 						:nav-item="item"
 					/>
 				</ul>
 			</li>
 
-			<li v-if="subNavItemList.lstNavItem.length > 0" class="mt-auto">
+			<li v-if="props.subNavItemList.length > 0" class="mt-auto">
 				<ul role="list" class="-mx-2 space-y-1">
 					<MatiNavItem
-						v-for="subItem in props.subNavItemList.lstNavItem"
+						v-for="subItem in props.subNavItemList"
 						:key="subItem.name"
 						:nav-item="subItem"
 					/>
@@ -25,17 +25,21 @@
 </template>
 
 <script setup lang="ts">
-// import { PropType } from 'vue'
-import MatiNavItem from './MatiNavItem.vue'
-import { NavItemListType } from '@/core/interfaces/INavItem'
+import { PropType } from 'vue';
+import MatiNavItem from '@/core/MatiNavItem.vue';
+import { INavItemType } from '@/core/interfaces/INavItem';
 
 const props = defineProps({
-	navItemList: { type: NavItemListType, required: true, default: () => [] },
+	navItemList: {
+		type: Array as PropType<Array<INavItemType>>,
+		required: true,
+		default: () => [],
+	},
 	subNavItemList: {
-		type: NavItemListType,
+		type: Array as PropType<Array<INavItemType>>,
 		required: false,
 		default: () => [],
 	},
 	withIcon: { type: Boolean, default: true },
-})
+});
 </script>

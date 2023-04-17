@@ -20,18 +20,20 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
+import { INavItemType } from '@/core/interfaces/INavItem';
+import { PropType } from 'vue';
 
-const router = useRouter()
+const router = useRouter();
 
 const NAV_ITEM_ACTIVE = {
 	active: 'bg-gray-800 text-white',
 	inactive: 'text-gray-400 hover:text-white hover:bg-gray-800',
-}
+};
 
 const props = defineProps({
 	navItem: {
-		type: Object,
+		type: Object as PropType<INavItemType>,
 		required: true,
 		default: () => ({
 			href: '#',
@@ -40,9 +42,9 @@ const props = defineProps({
 		}),
 	},
 	withIcon: { type: Boolean, default: true },
-})
+});
 
 const navigate = () => {
-	router.push(props.navItem.href)
-}
+	router.push(props.navItem.href);
+};
 </script>
